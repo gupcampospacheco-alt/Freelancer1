@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./index.html">
+title>Caixa de Mensagens</title>
+<style>
+  /* Reset rápido */
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+
+  body {
+    background: #f4f6f9;
+    display: flex;
+    justify-content: center;
+    padding: 50px 10px;
+  }
+
+  .mensagens-container {
+    width: 100%;
+    max-width: 700px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    padding: 20px;
+  }
+
+  .mensagens-container h2 {
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+  }
+
+  .mensagem {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    transition: background 0.3s;
+    border-radius: 8px;
+  }
+
+  .mensagem:hover {
+    background: #f0f4f8;
+  }
+
+  .mensagem.lida {
+    background: #e8f5e9;
+  }
+
+  .conteudo-mensagem {
+    flex: 1;
+  }
+
+  .conteudo-mensagem p {
+    margin-bottom: 8px;
+    color: #555;
+  }
+
+  .conteudo-mensagem small {
+    color: #999;
+  }
+
+  .acoes {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-left: 15px;
+  }
+
+  .acoes button {
+    background: #1976d2;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background 0.3s;
+  }
+
+  .acoes button:hover {
+    background: #0d47a1;
+  }
+
+  .acoes button.apagar {
+    background: #e53935;
+  }
+
+  .acoes button.apagar:hover {
+    background: #b71c1c;
+  }
+
+  /* Resposta */
+  .resposta-container {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+  }
+
+  .resposta-container input {
+    flex: 1;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    outline: none;
+  }
+
+  .resposta-container button {
+    background: #43a047;
+  }
+
+  .resposta-container button:hover {
+    background: #2e7d32;
+  }
+
+  @media(max-width: 600px){
+    .acoes {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+    .acoes button {
+      flex: 1 1 45%;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="mensagens-container">
+  <h2>Caixa de Mensagens</h2>
+
+  <div id="mensagensLista">
+    <!-- Mensagens geradas pelo JS -->
+  </div>
+</div>
+
+<script>
+  // Mensagens de exemplo
+  let mensagens = [
+    {id: 1, texto: "Olá, precisamos discutir o relatório.", lida: false, autor: "Chefe"},
+    {id: 2, texto: "Você pode revisar meu trabalho?", lida: true, autor: "Colega"},
+    {id: 3, texto: "Lembrete: reunião amanhã 10h.", lida: false, autor: "RH"}
+  ];
+
+  const mensagensLista = document.getElementById('mensagensLista');
+
+  function renderMensagens(){
+    mensagensLista.innerHTML = '';
+    mensagens.forEach(msg => {
+      const div = document.createElement('div');
+      div.className = 'mensagem' + (msg.lida ? ' lida' : '');
+      div.innerHTML = `
+        <div class="conteudo-mensagem">
+          <p><strong>${msg.autor}:</strong> ${msg.texto}</p>
+          <small>${msg.lida ? 'Lida' : 'Não lida'}</small>
+          <div class="resposta-container">
+            <input type="text" placeholder="Responder..." id="resposta-${msg.id}">
+            <button onclick="responderMensagem(${msg.id})">Enviar</button>
+          </div>
+        </div>
+        <div class="acoes">
+          <button onclick="marcarLida(${msg.id})">${msg.lida ? 'Desmarcar' : 'Marcar como lida'}</button>
+          <button class="apagar" onclick="apagarMensagem(${msg.id})">Apagar</button>
+        </div>
+      `;
+      mensagensLista.appendChild(div);
+    });
+  }
+
+  function marcarLida(id){
+    const msg = mensagens.find(m => m.id === id);
+    msg.lida = !msg.lida;
+    renderMensagens();
+  }
+
+  function apagarMensagem(id){
+    mensagens = mensagens.filter(m => m.id !== id);
+    renderMensagens();
+  }
+
+  function responderMensagem(id){
+    const input = document.getElementById(`resposta-${id}`);
+    if(input.value.trim() === '') return alert('Digite uma resposta!');
+    alert(`Resposta enviada: ${input.value}`);
+    input.value = '';
+    const msg = mensagens.find(m => m.id === id);
+    msg.lida = true;
+    renderMensagens();
+  }
+
+  renderMensagens();
+</script>
+
+<script src="./script.js"></script>
+
+</body>
+</html>

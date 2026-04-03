@@ -269,3 +269,418 @@ section {
 }
 
 }
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== BODY PADRÃO ===== */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f6f9;
+  color: #333;
+}
+
+/* ===== NAVBAR ===== */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* ===== BOTÃO ÁREA DO FUNCIONÁRIO ===== */
+.btn-funcionario {
+  padding: 12px 22px;
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+  color: white;
+  border-radius: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.3s ease;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.btn-funcionario:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+
+/* ================================= */
+/* ========== LOGIN PAGE =========== */
+/* ================================= */
+
+.login-body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+}
+
+.login-container {
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  width: 340px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  animation: fadeIn 0.5s ease;
+}
+
+.login-container h2 {
+  margin-bottom: 25px;
+  color: #1e3a8a;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.login-container input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.login-container button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-container button:hover {
+  background: #1d4ed8;
+  transform: scale(1.03);
+}
+
+.esqueci {
+  margin-top: 15px;
+  font-size: 13px;
+  color: #2563eb;
+  cursor: pointer;
+}
+
+.esqueci:hover {
+  text-decoration: underline;
+}
+
+/* ================================= */
+/* ======== PAINEL MENSAGENS ======= */
+/* ================================= */
+
+.card-mensagem {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.card-mensagem p {
+  margin-bottom: 8px;
+}
+
+/* ===== BOTÃO RESPONDER ===== */
+
+.btn-responder {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 15px;
+  background: #2563eb;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-responder:hover {
+  background: #1d4ed8;
+  transform: scale(1.05);
+}
+
+/* ================================= */
+/* ========= ANIMAÇÕES ============= */
+/* ================================= */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+ } 
+}
+/* ===== ALERTA PROFISSIONAL ===== */
+
+.alerta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  margin-top: 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  animation: aparecer 0.3s ease;
+  position: relative;
+}
+
+.alerta.oculto {
+  display: none;
+}
+
+/* Ícone */
+.alerta-icone {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Conteúdo */
+.alerta-conteudo {
+  flex: 1;
+}
+
+/* Botão fechar */
+.alerta-fechar {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: 0.2s;
+}
+
+.alerta-fechar:hover {
+  opacity: 1;
+}
+
+/* ===== TIPOS ===== */
+
+.alerta.erro {
+  background: #fff2f2;
+  border-left: 5px solid #d32f2f;
+  color: #b71c1c;
+}
+
+.alerta.erro .alerta-icone {
+  background: #d32f2f;
+  color: white;
+}
+
+.alerta.sucesso {
+  background: #edf7ed;
+  border-left: 5px solid #2e7d32;
+  color: #1b5e20;
+}
+
+.alerta.sucesso .alerta-icone {
+  background: #2e7d32;
+  color: white;
+}
+
+/* Animação */
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mensagens-container {
+  width: 100%;
+  max-width: 750px;
+  margin: 30px auto;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+  padding: 25px;
+  transition: all 0.3s;
+}
+
+.mensagens-container h2 {
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 25px;
+  color: #1e3a8a;
+  letter-spacing: 0.5px;
+}
+
+/* Cada mensagem */
+.card-mensagem {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 18px;
+  margin: 12px 0;
+  border-radius: 12px;
+  background: #f9f9f9;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+  transition: all 0.3s;
+  position: relative;
+}
+
+.card-mensagem:hover {
+  background: #f1f4f8;
+}
+
+.card-mensagem.lida {
+  background: #e8f5e9;
+}
+
+/* Conteúdo da mensagem */
+.conteudo-mensagem {
+  flex: 1;
+}
+
+.conteudo-mensagem p {
+  font-size: 15px;
+  color: #444;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.conteudo-mensagem small {
+  color: #999;
+  font-size: 12px;
+}
+
+/* Caixa de resposta */
+.resposta-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.resposta-container input {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.resposta-container input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 6px rgba(37, 99, 235, 0.3);
+}
+
+.resposta-container button {
+  background: #43a047;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.resposta-container button:hover {
+  background: #2e7d32;
+  transform: scale(1.03);
+}
+
+/* Ações da mensagem (marcar lida / apagar) */
+.acoes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-left: 15px;
+}
+
+.acoes button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.acoes button:hover {
+  background: #1d4ed8;
+  transform: scale(1.05);
+}
+
+.acoes button.apagar {
+  background: #e53935;
+}
+
+.acoes button.apagar:hover {
+  background: #b71c1c;
+}
+
+/* Ícones emoji nos botões */
+.acoes button::before {
+  content: '📌';
+  margin-right: 5px;
+}
+
+.acoes button.apagar::before {
+  content: '🗑️';
+}
+
+/* Responsivo */
+@media(max-width: 600px){
+  .acoes {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .acoes button {
+    flex: 1 1 45%;
+    margin-bottom: 5px;
+  }
+}
+
+/* Pequenas animações para mensagens novas */
+.card-mensagem.nova {
+  animation: aparecerMensagem 0.4s ease;
+}
+
+@keyframes aparecerMensagem {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
