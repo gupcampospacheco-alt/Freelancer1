@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dextro Consultoria | Profissionalização Financeira</title>
+    <link rel="stylesheet" href="style.css">
+    <a href="login.html">Área do Funcionário</a>
+</head>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, addDoc, collection } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+const firebaseConfig = {
+  apiKey: "AIzaSyANH5by99xb4LDkLHlVsj2GVll7IJ8VOCw",
+  authDomain: "dextro-site.firebaseapp.com",
+  projectId: "dextro-site",
+  storageBucket: "dextro-site.firebasestorage.app",
+  messagingSenderId: "429576521514",
+  appId: "1:429576521514:web:a5bb6af1104e9c40d10053"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+document.getElementById("formContato").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const nome = e.target[0].value;
+  const email = e.target[1].value;
+  const mensagem = e.target[2].value;
+
+  try {
+    await addDoc(collection(db, "mensagens"), {
+      nome,
+      email,
+      mensagem,
+      data: new Date()
+    });
+
+    alert("Mensagem enviada com sucesso!");
+    e.target.reset();
+
+  } catch (error) {
+    console.error("Erro:", error);
+  }
+});
+
+
+</script>
+
+<body>
+
+<header>
+    <h1>Dextro Consultoria</h1>
+    <div class="menu-toggle">&#9776;</div>
+    <nav>
+        <ul>
+            <li><a href="#home">Início</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#diferenciais">Diferenciais</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#contato">Contato</a></li>
+            <a href="login.html" class="btn-funcionario">
+  Área do Funcionário
+</a>
+        </ul>
+    </nav>
+</header>
+
+<section class="hero" id="home">
+    <h2>Profissionalização financeira com método, estratégia e clareza.</h2>
+    <p>Transformamos a gestão empresarial em um sistema organizado, previsível e estratégico.</p>
+    <a href="#contato" class="btn">Falar com Especialista</a>
+</section>
+
+<section id="sobre">
+    <h2 class="section-title">Sobre a Dextro</h2>
+    <p class="center-text">
+        Atuamos na profissionalização da gestão de organizações públicas e privadas,
+        estruturando processos financeiros e estratégicos que geram crescimento sustentável.
+    </p>
+</section>
+
+<section id="servicos">
+    <h2 class="section-title">Nossos Serviços</h2>
+    <div class="cards">
+        <div class="card">
+            <h3>BPO Financeiro</h3>
+            <p>Terceirização estratégica do setor financeiro com controle e previsibilidade.</p>
+        </div>
+        <div class="card">
+            <h3>Consultoria</h3>
+            <p>Diagnóstico e implementação de melhorias estruturais na gestão.</p>
+        </div>
+        <div class="card">
+            <h3>Assessoria</h3>
+            <p>Acompanhamento contínuo para evolução organizacional.</p>
+        </div>
+        <div class="card">
+            <h3>Instrutoria</h3>
+            <p>Capacitação prática para equipes e gestores.</p>
+        </div>
+    </div>
+</section>
+
+<section id="diferenciais">
+    <h2 class="section-title">Diferenciais</h2>
+    <div class="cards">
+        <div class="card">
+            <h3>Metodologia Própria</h3>
+            <p>Processos organizados e estruturados.</p>
+        </div>
+        <div class="card">
+            <h3>Visão Estratégica</h3>
+            <p>Não apenas operacional — foco em crescimento.</p>
+        </div>
+        <div class="card">
+            <h3>Clareza e Segurança</h3>
+            <p>Informações financeiras organizadas e confiáveis.</p>
+        </div>
+    </div>
+</section>
+
+<section id="blog">
+    <h2 class="section-title">Blog Estratégico</h2>
+    <div class="cards">
+        <div class="card">
+            <h3>Como organizar o financeiro da sua empresa</h3>
+            <p>Estrutura básica para profissionalizar sua gestão.</p>
+        </div>
+        <div class="card">
+            <h3>Indicadores financeiros essenciais</h3>
+            <p>KPIs que todo gestor deve acompanhar.</p>
+        </div>
+    </div>
+</section>
+
+<section id="contato">
+    <h2 class="section-title">Fale Conosco</h2>
+    <form id="formContato">
+        <input type="text" placeholder="Seu nome" required>
+        <input type="email" placeholder="Seu e-mail" required>
+        <textarea rows="5" placeholder="Sua mensagem"></textarea>
+        <button type="submit" class="btn">Enviar Mensagem</button>
+    </form>
+</section>
+
+<footer>
+    © 2026 Dextro Consultoria | Todos os direitos reservados
+</footer>
+
+<a class="whatsapp" href="https://wa.me/5500000000000" target="_blank">💬</a>
+
+<script src="./script.js"></script>
+
+</body>
+</html>

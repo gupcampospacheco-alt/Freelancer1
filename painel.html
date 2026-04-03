@@ -1,0 +1,44 @@
+<h2>Mensagens Recebidas</h2>
+<div id="listaMensagens"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyANH5by99xb4LDkLHlVsj2GVll7IJ8VOCw",
+  authDomain: "dextro-site.firebaseapp.com",
+  projectId: "dextro-site",
+  storageBucket: "dextro-site.firebasestorage.app",
+  messagingSenderId: "429576521514",
+  appId: "1:429576521514:web:a5bb6af1104e9c40d10053"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const lista = document.getElementById("listaMensagens");
+
+lista.innerHTML += `
+  <div class="card-mensagem">
+    <p><strong>Nome:</strong> ${dados.nome}</p>
+    <p><strong>Email:</strong> ${dados.email}</p>
+    <p><strong>Mensagem:</strong> ${dados.mensagem}</p>
+
+    <a 
+      class="btn-responder"
+      href="mailto:${dados.email}?subject=Resposta da Loja"
+    >
+      Responder
+    </a>
+  </div>
+`;
+
+<select>
+  <option>Nova</option>
+  <option>Em atendimento</option>
+  <option>Respondida</option>
+</select>
+
+
+</script>

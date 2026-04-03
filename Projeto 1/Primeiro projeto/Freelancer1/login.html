@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Conecta com seu CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="login-body">
+
+  <div class="login-container">
+    <h2>Área do Funcionário</h2>
+
+    <input type="email" id="email" placeholder="Digite seu email">
+    <input type="password" id="senha" placeholder="Digite sua senha">
+
+    <button onclick="login()">Entrar</button>
+
+    <p id="mensagem"></p>
+
+   <p class="esqueci" onclick="window.location.href='recuperar.html'">
+  Esqueci minha senha
+</p>
+  </div>
+
+<script type="module">
+    
+    
+
+// ===== IMPORTS FIREBASE =====
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+// ===== CONFIG FIREBASE =====
+const firebaseConfig = {
+    apiKey: "AIzaSyANH5by99xb4LDkLHlVsj2GVll7IJ8VOCw",
+  authDomain: "dextro-site.firebaseapp.com",
+  projectId: "dextro-site",
+  storageBucket: "dextro-site.firebasestorage.app",
+  messagingSenderId: "429576521514",
+  appId: "1:429576521514:web:a5bb6af1104e9c40d10053"
+ 
+};
+
+// ===== INICIALIZA =====
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// ===== LOGIN =====
+window.login = async function () {
+
+  const email = document.getElementById("email").value.trim();
+  const senha = document.getElementById("senha").value.trim();
+  const mensagem = document.getElementById("mensagem");
+
+  mensagem.innerText = "";
+
+  if (!email || !senha) {
+    mensagem.innerText = "Preencha todos os campos!";
+    return;
+  }
+
+  try {
+
+    const userCredential = await signInWithEmailAndPassword(auth, email, senha);
+    const user = userCredential.user;
+
+    if (!user.emailVerified) {
+      mensagem.innerText = "Verifique seu e-mail antes de entrar!";
+      return;
+    }
+
+    mensagem.innerText = "Login realizado com sucesso!";
+    window.location.href = "painel.html";
+
+  } catch (error) {
+
+    console.log(error); // ajuda a ver no F12
+
+    if (
+      error.code === "auth/invalid-credential" ||
+      error.code === "auth/user-not-found" ||
+      error.code === "auth/wrong-password"
+    ) {
+      mensagem.innerText = "Email ou senha incorretos!";
+    } else {
+      mensagem.innerText = "Erro ao fazer login!";
+    }
+    
+  }
+  mostrarMensagem("Login realizado com sucesso!", "sucesso");
+};
+
+
+</script>
+
+</body>
+</html>

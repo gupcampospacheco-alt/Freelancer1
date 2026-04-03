@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Recuperar Senha</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="login-body">
+
+  <div class="login-container">
+    <h2>Recuperar Senha</h2>
+    <p style="font-size:14px; margin-bottom:20px; color:#555;">
+      Digite seu email para receber o link de redefinição.
+    </p>
+
+    <input type="email" id="email" placeholder="Digite seu email">
+
+    <button onclick="enviarRecuperacao()">Enviar Link</button>
+
+    <p class="esqueci" onclick="voltarLogin()">Voltar ao login</p>
+
+    <p id="mensagemStatus" style="margin-top:15px; font-size:13px;"></p>
+  </div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+const firebaseConfig = {
+ apiKey: "AIzaSyANH5by99xb4LDkLHlVsj2GVll7IJ8VOCw",
+  authDomain: "dextro-site.firebaseapp.com",
+  projectId: "dextro-site",
+  storageBucket: "dextro-site.firebasestorage.app",
+  messagingSenderId: "429576521514",
+  appId: "1:429576521514:web:a5bb6af1104e9c40d10053"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+window.enviarRecuperacao = function() {
+  const email = document.getElementById("email").value;
+  const status = document.getElementById("mensagemStatus");
+
+
+  if (!email) {
+    status.style.color = "red";
+    status.innerText = "Digite um email válido.";
+    return;
+  }
+
+  sendPasswordResetEmail(auth, email)
+    .then(() => {
+      status.style.color = "green";
+      status.innerText = "Link de recuperação enviado com sucesso!";
+    })
+    .catch((error) => {
+    status.innerText = "Erro: " + error.message;
+    console.log(error);
+    });
+};
+
+window.voltarLogin = function() {
+  window.location.href = "login.html";
+  
+};
+
+</script>
+
+</body>
+</html>
